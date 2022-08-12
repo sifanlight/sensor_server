@@ -10,6 +10,7 @@ from watchdog.events import PatternMatchingEventHandler
 f = open('Final.csv', 'w+')
 f.close()
 
+fileCounter = 0
 
 
 patterns = ["data.csv"]
@@ -24,6 +25,7 @@ def on_modified(event):
     global gravity
     global gyro
     global label
+    global fileCounter
     with open('data.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
@@ -33,7 +35,12 @@ def on_modified(event):
     print(lastRow)
     with open('Final.csv', 'a') as f:
         writer = csv.writer(f)
-        writer.writerow([lastRow, accel[0], accel[1], accel[2], gravity[0], gravity[1], gravity[2], gyro[0], gyro[1], gyro[2], label])
+        if (fileCounter == 1):
+            writer.writerow(["RSSI", "accel_x", "accel_y", "accel_z", "gravity_x", "gravity_y", "gravity_z", "gyro_x", "gyro_y", "gyro_z", "label"])    
+        if (fileCounter > 3):
+            writer.writerow([lastRow, accel[0], accel[1], accel[2], gravity[0], gravity[1], gravity[2], gyro[0], gyro[1], gyro[2], label])
+        else:
+            fileCounter = fileCounter +1
 
 
 my_event_handler.on_modified = on_modified
