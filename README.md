@@ -15,5 +15,5 @@ $> gcc scannerMod.c -o scannerMod -lbluetooth
 ```
 and run the output with root access.
 
-For this android client please visit this repository:<\br>
+For this android client please visit this repository:</br>
 https://github.com/sifanlight/sensor_android_client
