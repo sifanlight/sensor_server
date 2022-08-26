@@ -36,9 +36,9 @@ def on_modified(event):
     with open('Final.csv', 'a') as f:
         writer = csv.writer(f)
         if (fileCounter == 1):
-            writer.writerow(["RSSI", "accel_x", "accel_y", "accel_z", "gravity_x", "gravity_y", "gravity_z", "gyro_x", "gyro_y", "gyro_z", "label"])    
+            writer.writerow(["RSSI", "accel_x", "accel_y", "accel_z",  "gyro_x", "gyro_y", "gyro_z", "label"])    
         if (fileCounter > 3):
-            writer.writerow([lastRow, accel[0], accel[1], accel[2], gravity[0], gravity[1], gravity[2], gyro[0], gyro[1], gyro[2], label])
+            writer.writerow([lastRow, accel[0] - gravity[0], accel[1] - gravity[1], accel[2] - gravity[2], gyro[0], gyro[1], gyro[2], label])
         else:
             fileCounter = fileCounter +1
 
@@ -85,7 +85,7 @@ try:
         while 1:
             buf = conn.recv(200)
             msg = buf.decode("utf-8")
-            # print(msg)
+            print(msg)
             d = []
             for i in msg.split("}")[0:-1]:
                 if (len(i) > 0):
