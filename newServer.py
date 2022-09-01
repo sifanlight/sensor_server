@@ -26,6 +26,9 @@ def on_modified(event):
     global gyro
     global label
     global fileCounter
+    global dataCounter
+    print("Number of data = " + str(dataCounter))
+    dataCounter = dataCounter + 1
     with open('data.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
@@ -52,7 +55,7 @@ my_observer.schedule(my_event_handler, path, recursive=go_recursively)
 
 my_observer.start()
 
-HOST = '192.168.0.163' #this is your localhost
+HOST = '192.168.201.128' #this is your localhost
 PORT = 8888
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -78,6 +81,7 @@ accel = [0.0, 0.0, 0.0]
 gyro = [0.0, 0.0, 0.0]
 gravity = [0.0, 0.0 ,0.0]
 label = ""
+dataCounter = 0;
 try:
     while 1:
         conn, addr = s.accept()

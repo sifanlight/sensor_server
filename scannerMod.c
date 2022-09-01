@@ -125,7 +125,7 @@ int main()
     fp = fopen("data.csv","w+");
     fprintf(fp, "rssi\n");
     fclose(fp);
-	while ( last_detection_time - now < 10 && count < 1000 ) {
+	while ( 1 ) {
 		len = read(device, buf, sizeof(buf));
 		if ( len >= HCI_EVENT_HDR_SIZE ) {
 		    count++;
