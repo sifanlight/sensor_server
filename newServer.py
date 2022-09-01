@@ -108,7 +108,10 @@ try:
                         gravity[1] = data["y"]
                         gravity[2] = data["z"]
                 elif ("L" in data):
-                    label = data["L"]
+                    if (data["L"] == "N"):
+                        label = 1
+                    else:
+                        label = 0
             # print(type(msg))
             # print("-------------")
             s = "Accel="+str(accel[0])+","+str(accel[1])+","+str(accel[2])
@@ -117,7 +120,7 @@ try:
             print(s)
             s = "Gyro="+str(gyro[0])+","+str(gyro[1])+","+str(gyro[2])
             print(s)
-            s = "Label =" + label
+            s = "Label =" + str(label)
             print(s)
 except:
     s.close()
